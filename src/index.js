@@ -1,17 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import { CommentDetails } from "./CommentDetails";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const CommentConfig = [
+    {author : 'Alex', date : 'Today at 6:00 PM', content : 'Great post !'},
+    {author : 'Sam', date : 'Today at 8:15 PM', content : 'Informative. Thanks'},
+    {author : 'Jade', date : 'Today at 6:00 PM', content : 'Looks great'},
+    {author : 'Brian', date : 'Today at 9:30 PM', content : "I'm in the kitchen"}
+]
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+export const App = () => {
+    const renderComments = () => {
+        return CommentConfig.map((comment, i) => {
+            return (
+                <CommentDetails
+                key={i}
+                author={comment.author}
+                date={comment.date}
+                content={comment.content}
+                />
+            );
+        });
+    };
+
+  return (
+    <div className='ui container comments'>{renderComments()}</div>
+  );
+};
+
+ReactDOM.render(<App />, document.querySelector("#root"));
